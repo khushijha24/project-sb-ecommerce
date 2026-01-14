@@ -7,7 +7,7 @@ import lombok.*;
 @Table(name = "users")
 @Getter
 @Setter
-@NoArgsConstructor
+//@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class User {
@@ -28,8 +28,8 @@ public class User {
     @Column(nullable = false)
     private String role; // USER / ADMIN
 
-//    public User() {
-//    }
+    public User() {
+    }
 
     public User(String email, String password, String role) {
         this.email = email;

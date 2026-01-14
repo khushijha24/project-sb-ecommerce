@@ -1,5 +1,6 @@
 package com.pro_sb_ecommerce.auth.controller;
 
+import com.pro_sb_ecommerce.auth.dto.LoginRequestDTO;
 import com.pro_sb_ecommerce.auth.model.User;
 import com.pro_sb_ecommerce.auth.service.AuthService;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +20,14 @@ public class AuthController {
         return authService.register(user);
     }
 
+//    @PostMapping("/login")
+//    public User login(@RequestParam String email,
+//                      @RequestParam String password) {
+//        return authService.login(email, password);
+//    }
+
     @PostMapping("/login")
-    public User login(@RequestParam String email,
-                      @RequestParam String password) {
-        return authService.login(email, password);
+    public User login(@RequestBody LoginRequestDTO request) {
+        return authService.login(request.getEmail(), request.getPassword());
     }
 }
