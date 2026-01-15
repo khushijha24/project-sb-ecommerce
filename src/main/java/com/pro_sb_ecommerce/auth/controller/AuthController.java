@@ -1,8 +1,11 @@
 package com.pro_sb_ecommerce.auth.controller;
 
-import com.pro_sb_ecommerce.auth.dto.LoginRequestDTO;
-import com.pro_sb_ecommerce.auth.model.User;
+import com.pro_sb_ecommerce.auth.dto.AuthResponse;
+import com.pro_sb_ecommerce.auth.dto.RegisterRequest;
+import com.pro_sb_ecommerce.auth.dto.LoginRequest;
+//import com.pro_sb_ecommerce.auth.model.User;
 import com.pro_sb_ecommerce.auth.service.AuthService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,10 +18,19 @@ public class AuthController {
         this.authService = authService;
     }
 
+//    @PostMapping("/register")
+//    public User register(@RequestBody User user) {
+//        return authService.register(user);
+//    }
+
+    // ✅ REGISTER
     @PostMapping("/register")
-    public User register(@RequestBody User user) {
-        return authService.register(user);
+    public ResponseEntity<AuthResponse> register(
+            @RequestBody RegisterRequest request
+    ) {
+        return ResponseEntity.ok(authService.register(request));
     }
+
 
 //    @PostMapping("/login")
 //    public User login(@RequestParam String email,
@@ -26,8 +38,22 @@ public class AuthController {
 //        return authService.login(email, password);
 //    }
 
+//    @PostMapping("/login")
+//    public User login(@RequestBody LoginRequest request) {
+//        return authService.login(request.getEmail(), request.getPassword());
+//    }
+
+    // ✅ LOGIN
     @PostMapping("/login")
-    public User login(@RequestBody LoginRequestDTO request) {
-        return authService.login(request.getEmail(), request.getPassword());
+    public ResponseEntity<AuthResponse> login(
+            @RequestBody LoginRequest request
+    ) {
+        return ResponseEntity.ok(authService.login(request));
+    }
+
+
+    @GetMapping("/hello")
+    public String sayHello(){
+        return "Hello";
     }
 }

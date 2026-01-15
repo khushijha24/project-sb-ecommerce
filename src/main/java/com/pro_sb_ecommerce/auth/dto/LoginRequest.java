@@ -1,11 +1,11 @@
 package com.pro_sb_ecommerce.auth.dto;
 
-public class LoginRequestDTO {
+public class LoginRequest {
 
     private String email;
     private String password;
 
-    public LoginRequestDTO() {}
+//    public LoginRequest() {}
 
     public String getEmail() {
         return email;
@@ -22,5 +22,4 @@ public class LoginRequestDTO {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }
