@@ -6,6 +6,7 @@ import com.pro_sb_ecommerce.auth.dto.LoginRequest;
 import com.pro_sb_ecommerce.auth.dto.RegisterRequest;
 import com.pro_sb_ecommerce.auth.model.User;
 import com.pro_sb_ecommerce.auth.repository.UserRepository;
+import com.pro_sb_ecommerce.auth.security.JwtUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +15,14 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
     public AuthService(UserRepository userRepository,
-                       PasswordEncoder passwordEncoder) {
+                       PasswordEncoder passwordEncoder,
+                       JwtUtil jwtUtil) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
     }
 
     // ✅ REGISTER (password encrypted)
@@ -33,11 +37,14 @@ public class AuthService {
 
         userRepository.save(user);
 
+        String token = jwtUtil.generateToken(user.getEmail());
+
         return new AuthResponse(
                 user.getId(),
                 user.getName(),
                 user.getEmail(),
-                user.getRole()
+                user.getRole(),
+                token
         );
     }
 
@@ -51,11 +58,14 @@ public class AuthService {
             throw new RuntimeException("Invalid credentials");
         }
 
+        String token = jwtUtil.generateToken(user.getEmail());
+
         return new AuthResponse(
                 user.getId(),
                 user.getName(),
                 user.getEmail(),
-                user.getRole()
+                user.getRole(),
+                token
         );
     }
 }

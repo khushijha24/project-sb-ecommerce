@@ -12,6 +12,7 @@ public class AuthResponse {
     private String name;
     private String email;
     private String role;
+    private String token;
 
 //    public AuthResponse(Long id, String name, String email, String role) {
 //        this.id = id;
