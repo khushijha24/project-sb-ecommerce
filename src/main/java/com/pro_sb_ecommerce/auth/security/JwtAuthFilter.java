@@ -40,9 +40,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         String token = authHeader.substring(7);
         String email;
+        String role;
 
         try {
             email = jwtUtil.extractEmail(token);
+            role = jwtUtil.extractRole(token);
         } catch (Exception e) {
             filterChain.doFilter(request, response);
             return;
@@ -51,12 +53,16 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         // If user not already authenticated
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-            // ROLE is not loaded from DB yet (we will improve later)
+            // Spring Security requires ROLE_ prefix
+            SimpleGrantedAuthority authority =
+                    new SimpleGrantedAuthority("ROLE_" + role);
+
             UsernamePasswordAuthenticationToken authToken =
                     new UsernamePasswordAuthenticationToken(
                             email,
                             null,
-                            List.of(new SimpleGrantedAuthority("ROLE_USER"))
+//                            List.of(new SimpleGrantedAuthority("ROLE_USER"))
+                            List.of(authority)
                     );
 
             authToken.setDetails(
