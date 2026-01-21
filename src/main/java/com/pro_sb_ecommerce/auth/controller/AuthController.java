@@ -1,6 +1,7 @@
 package com.pro_sb_ecommerce.auth.controller;
 
 import com.pro_sb_ecommerce.auth.dto.AuthResponse;
+import com.pro_sb_ecommerce.auth.dto.RegisterResponse;
 import com.pro_sb_ecommerce.auth.dto.RegisterRequest;
 import com.pro_sb_ecommerce.auth.dto.LoginRequest;
 //import com.pro_sb_ecommerce.auth.model.User;
@@ -9,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
 
     private final AuthService authService;
@@ -25,24 +26,17 @@ public class AuthController {
 
     // ✅ REGISTER
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(
+    public ResponseEntity<RegisterResponse> register(
             @RequestBody RegisterRequest request
     ) {
         return ResponseEntity.ok(authService.register(request));
     }
 
 
-
-
 //    @PostMapping("/login")
 //    public User login(@RequestParam String email,
 //                      @RequestParam String password) {
 //        return authService.login(email, password);
-//    }
-
-//    @PostMapping("/login")
-//    public User login(@RequestBody LoginRequest request) {
-//        return authService.login(request.getEmail(), request.getPassword());
 //    }
 
     // ✅ LOGIN
