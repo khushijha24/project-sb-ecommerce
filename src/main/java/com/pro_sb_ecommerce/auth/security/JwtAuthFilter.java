@@ -32,7 +32,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getServletPath();
-        return path.contains("/api/auth/");
+        return path.contains("/auth/");
     }
 
 
@@ -42,9 +42,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain
     ) throws ServletException, IOException {
-//        System.out.println("JwtAuthFilter running for: " + request.getRequestURI());
+        System.out.println("JwtAuthFilter running for: " + request.getRequestURI());
 
         String authHeader = request.getHeader("Authorization");
+        System.out.println("Authorization Header: " + authHeader);
 
         // If no token → continue request
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
@@ -64,6 +65,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             return;
         }
 
+        System.out.println("Extracted email: " + email);
+        System.out.println("Extracted role: " + role);
+
         // If user not already authenticated
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
@@ -79,11 +83,17 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                             List.of(authority)
                     );
 
-            authToken.setDetails(
-                    new WebAuthenticationDetailsSource().buildDetails(request)
-            );
+//            authToken.setDetails(
+//                    new WebAuthenticationDetailsSource().buildDetails(request)
+//            );
+
+            System.out.println("Before setting auth: "
+                    + SecurityContextHolder.getContext().getAuthentication());
 
             SecurityContextHolder.getContext().setAuthentication(authToken);
+
+            System.out.println("After setting auth: "
+                    + SecurityContextHolder.getContext().getAuthentication());
         }
 
         filterChain.doFilter(request, response);
