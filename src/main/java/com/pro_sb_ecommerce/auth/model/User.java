@@ -3,6 +3,8 @@ package com.pro_sb_ecommerce.auth.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "users")
 @Getter
@@ -27,5 +29,10 @@ public class User {
 
     @Column(nullable = false)
     private String role; // USER / ADMIN
+
+//    private boolean enabled; // OTP verified or not
+//
+//    private String otp;
+//    private LocalDateTime otpExpiry;
 
 }
