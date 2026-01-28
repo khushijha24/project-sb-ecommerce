@@ -18,15 +18,15 @@ public class ProductController {
         this.productService = productService;
     }
 
-    // 👑 ADMIN ONLY
+    // ADMIN ONLY
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ProductResponse addProduct(@RequestBody ProductRequest request) {
         return productService.addProduct(request);
     }
 
-    // 👤 USER ONLY
-    @PreAuthorize("hasRole('USER')")
+    // USER ONLY
+//    @PreAuthorize("hasRole('USER')")
     @GetMapping
     public List<ProductResponse> getAllProducts() {
         return productService.getAllProducts();
