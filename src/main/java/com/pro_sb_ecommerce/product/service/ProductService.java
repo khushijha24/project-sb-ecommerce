@@ -1,5 +1,6 @@
 package com.pro_sb_ecommerce.product.service;
 
+import com.pro_sb_ecommerce.exception.ResourceNotFoundException;
 import com.pro_sb_ecommerce.product.dto.ProductRequest;
 import com.pro_sb_ecommerce.product.dto.ProductResponse;
 import com.pro_sb_ecommerce.product.model.Category;
@@ -28,7 +29,7 @@ public class ProductService {
 
 
         Category category = categoryRepository.findById(request.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
 
         Product product = Product.builder()
                 .name(request.getName())
@@ -61,6 +62,59 @@ public class ProductService {
                         p.getStock()
                 ))
                 .toList();
+    }
+
+    public ProductResponse getProductById(Long id) {
+
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id " + id));
+
+        return new ProductResponse(
+                product.getId(),
+                product.getName(),
+                product.getDescription(),
+                product.getPrice(),
+                product.getStock()
+        );
+    }
+
+    public List<Product> getProductsByCategory(Long categoryId) {
+        return productRepository.findByCategoryId(categoryId);
+    }
+
+    public ProductResponse updateProduct(Long id, ProductRequest request) {
+
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+
+        Category category = categoryRepository.findById(request.getCategoryId())
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
+
+        product.setName(request.getName());
+        product.setDescription(request.getDescription());
+        product.setPrice(request.getPrice());
+        product.setStock(request.getStock());
+        product.setCategory(category);
+
+        Product saved = productRepository.save(product);
+
+        return new ProductResponse(
+                saved.getId(),
+                saved.getName(),
+                saved.getDescription(),
+                saved.getPrice(),
+                saved.getStock()
+        );
+    }
+
+
+    public void deleteProduct(Long id) {
+
+        if (!productRepository.existsById(id)) {
+            throw new RuntimeException("Product not found");
+        }
+
+        productRepository.deleteById(id);
     }
 }
 
