@@ -4,6 +4,7 @@ import com.pro_sb_ecommerce.product.dto.ProductRequest;
 import com.pro_sb_ecommerce.product.dto.ProductResponse;
 import com.pro_sb_ecommerce.product.model.Product;
 import com.pro_sb_ecommerce.product.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,7 +25,7 @@ public class ProductController {
     // ADMIN ONLY
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<ProductResponse> addProduct(@RequestBody ProductRequest request) {
+    public ResponseEntity<ProductResponse> addProduct(@Valid @RequestBody ProductRequest request) {
         ProductResponse response = productService.addProduct(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

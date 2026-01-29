@@ -1,0 +1,18 @@
+package com.pro_sb_ecommerce.response;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ApiResponse <T>{
+
+    private int status;
+    private boolean success;
+    private String message;
+    private T data;
+}
