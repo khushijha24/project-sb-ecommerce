@@ -6,6 +6,7 @@ import com.pro_sb_ecommerce.auth.dto.RegisterRequest;
 import com.pro_sb_ecommerce.auth.dto.LoginRequest;
 //import com.pro_sb_ecommerce.auth.model.User;
 import com.pro_sb_ecommerce.auth.service.AuthService;
+import com.pro_sb_ecommerce.response.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -29,10 +30,19 @@ public class AuthController {
 
     // ✅ REGISTER
     @PostMapping("/register")
-    public ResponseEntity<RegisterResponse> register(
+    public ResponseEntity<ApiResponse<RegisterResponse>> register(
             @Valid @RequestBody RegisterRequest request
     ) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(request));
+        RegisterResponse data = authService.register(request);
+
+        ApiResponse<RegisterResponse> response = ApiResponse.<RegisterResponse>builder()
+                .status(HttpStatus.CREATED.value())
+                .success(true)
+                .message("User registered successfully")
+                .data(data)
+                .build();
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
 
@@ -44,10 +54,20 @@ public class AuthController {
 
     // ✅ LOGIN
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(
+    public ResponseEntity<ApiResponse<AuthResponse>> login(
             @Valid @RequestBody LoginRequest request
     ) {
-        return ResponseEntity.ok(authService.login(request));
+
+        AuthResponse data = authService.login(request);
+
+        ApiResponse<AuthResponse> response = ApiResponse.<AuthResponse>builder()
+                .status(HttpStatus.OK.value())
+                .success(true)
+                .message("Login successful")
+                .data(data)
+                .build();
+
+        return ResponseEntity.ok(response);
     }
 
 

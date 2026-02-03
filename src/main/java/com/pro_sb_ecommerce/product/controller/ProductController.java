@@ -2,14 +2,12 @@ package com.pro_sb_ecommerce.product.controller;
 
 import com.pro_sb_ecommerce.product.dto.ProductRequest;
 import com.pro_sb_ecommerce.product.dto.ProductResponse;
-import com.pro_sb_ecommerce.product.model.Product;
 import com.pro_sb_ecommerce.product.service.ProductService;
 import com.pro_sb_ecommerce.response.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
