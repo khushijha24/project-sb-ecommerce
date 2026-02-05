@@ -1,4 +1,16 @@
 package com.pro_sb_ecommerce.cart.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+import java.util.List;
+
+@Getter
+@AllArgsConstructor
 public class CartResponse {
+
+    private Long cartId;
+    private Long userId;
+    private List<CartItemResponse> items;
+    private double totalAmount;
 }
