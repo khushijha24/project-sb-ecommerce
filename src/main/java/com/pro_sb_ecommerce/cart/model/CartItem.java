@@ -32,8 +32,6 @@ public class CartItem {
 
     // Price snapshot at the time of adding product
     @Column(nullable = false)
-    private Double price;
-
-    private double priceAtTime;
+    private Double priceAtTime;
 
 }

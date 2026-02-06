@@ -34,14 +34,20 @@ public class Cart {
     )
     private List<CartItem> items = new ArrayList<>();
 
-    @PrePersist
-    public void onCreate(){
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    public void onUpdate(){
-        updatedAt = LocalDateTime.now();
-    }
+//    @Column(nullable = false, updatable = false)
+//    private LocalDateTime createdAt;
+//
+//    @Column(nullable = false)
+//    private LocalDateTime updatedAt;
+//
+//    @PrePersist
+//    public void onCreate(){
+//        createdAt = LocalDateTime.now();
+//        updatedAt = LocalDateTime.now();
+//    }
+//
+//    @PreUpdate
+//    public void onUpdate(){
+//        updatedAt = LocalDateTime.now();
+//    }
 }
