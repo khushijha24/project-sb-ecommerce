@@ -105,18 +105,15 @@ public class CartService {
         Cart cart = cartRepository.findByUser(user)
                 .orElseThrow(() -> new ResourceNotFoundException("Cart not found"));
 
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
-
-        CartItem item = cartItemRepository.findByCartAndProduct(cart, product)
+        CartItem item = cart.getItems().stream()
+                .filter(i -> i.getProduct().getId().equals(productId))
+                .findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException("Item not found in cart"));
 
+        cart.getItems().remove(item);
         cartItemRepository.delete(item);
 
-        Cart updatedCart = cartRepository.findById(cart.getId())
-                .orElse(cart);
-
-        return CartMapper.toResponse(updatedCart);
+        return CartMapper.toResponse(cart);
 
     }
 
