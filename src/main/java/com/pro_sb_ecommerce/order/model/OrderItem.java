@@ -24,8 +24,9 @@ public class OrderItem {
     private Order order;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
+//    @JoinColumn(name = "product_id", nullable = false)
+    private Long productId;
+    private String productName;
 
     @Column(nullable = false)
     private Integer quantity;
@@ -37,6 +38,6 @@ public class OrderItem {
     private BigDecimal subtotal;
 
     public void calculateSubtotal() {
-        this.subtotal = price.multiply(new BigDecimal(quantity));
+        this.subtotal = price.multiply(BigDecimal.valueOf(quantity));;
     }
 }
