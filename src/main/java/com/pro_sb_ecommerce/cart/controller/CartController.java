@@ -6,6 +6,7 @@ import com.pro_sb_ecommerce.auth.repository.UserRepository;
 import com.pro_sb_ecommerce.cart.dto.AddToCartRequest;
 import com.pro_sb_ecommerce.cart.dto.CartResponse;
 import com.pro_sb_ecommerce.cart.service.CartService;
+import com.pro_sb_ecommerce.exception.ResourceNotFoundException;
 import com.pro_sb_ecommerce.response.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,7 @@ public class CartController {
         String email = authentication.getName(); // from JWT "sub"
 
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
     @GetMapping
     public ResponseEntity<ApiResponse<CartResponse>> viewCart(Authentication authentication) {

@@ -5,6 +5,7 @@ import com.pro_sb_ecommerce.cart.dto.CartResponse;
 import com.pro_sb_ecommerce.cart.model.Cart;
 import com.pro_sb_ecommerce.cart.model.CartItem;
 
+import java.math.BigDecimal;
 import java.util.List;
 public class CartMapper {
 
@@ -14,9 +15,9 @@ public class CartMapper {
                 .map(CartMapper::toItemResponse)
                 .toList();
 
-        double totalAmount = items.stream()
-                .mapToDouble(CartItemResponse::getTotalPrice)
-                .sum();
+        BigDecimal totalAmount = items.stream()
+                .map(CartItemResponse::getTotalPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         return new CartResponse(
                 cart.getId(),
@@ -27,12 +28,16 @@ public class CartMapper {
     }
 
     private static CartItemResponse toItemResponse(CartItem item) {
+
+        BigDecimal subtotal = item.getPriceAtTime()
+                .multiply(BigDecimal.valueOf(item.getQuantity()));
+
         return new CartItemResponse(
                 item.getProduct().getId(),
                 item.getProduct().getName(),
                 item.getPriceAtTime(),
                 item.getQuantity(),
-                item.getQuantity() * item.getPriceAtTime()
+                subtotal
         );
     }
 

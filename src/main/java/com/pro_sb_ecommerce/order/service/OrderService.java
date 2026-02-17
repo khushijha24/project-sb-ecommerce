@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Transactional
@@ -69,6 +70,10 @@ public class OrderService {
         cart.getItems().clear();
 
         return savedOrder;
+    }
+
+    public List<Order> getOrdersByUser(User user) {
+        return orderRepository.findByUserOrderByOrderDateDesc(user);
     }
 }
 
