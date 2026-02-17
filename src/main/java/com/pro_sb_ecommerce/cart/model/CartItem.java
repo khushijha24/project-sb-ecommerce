@@ -4,6 +4,8 @@ import com.pro_sb_ecommerce.product.model.Product;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "cart_items")
 @Getter
@@ -31,7 +33,7 @@ public class CartItem {
     private Integer quantity;
 
     // Price snapshot at the time of adding product
-    @Column(nullable = false)
-    private Double priceAtTime;
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal priceAtTime;
 
 }

@@ -10,6 +10,7 @@ import com.pro_sb_ecommerce.order.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Service
@@ -47,8 +48,8 @@ public class OrderService {
 
             OrderItem orderItem = OrderItem.builder()
                     .order(order)
-                    .product(cartItem.getProduct().getId())
-                    .product(cartItem.getProduct().getName())
+                    .productId(cartItem.getProduct().getId())
+                    .productName(cartItem.getProduct().getName())
                     .quantity(cartItem.getQuantity())
                     .price(cartItem.getPriceAtTime()) // snapshot
                     .build();
