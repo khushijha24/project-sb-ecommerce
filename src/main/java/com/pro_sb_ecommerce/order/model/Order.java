@@ -25,16 +25,20 @@ public class Order {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Builder.Default
     @Column(nullable = false)
     private LocalDateTime orderDate = LocalDateTime.now();
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private OrderStatus status = OrderStatus.PENDING;
 
+    @Builder.Default
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal totalAmount = BigDecimal.ZERO;
 
+    @Builder.Default
     @OneToMany(
             mappedBy = "order",
             cascade = CascadeType.ALL,
