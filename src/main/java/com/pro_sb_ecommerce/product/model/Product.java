@@ -3,6 +3,8 @@ package com.pro_sb_ecommerce.product.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Getter
 @Setter
@@ -19,7 +21,7 @@ public class Product {
 
     private String description;
 
-    private double price;
+    private BigDecimal price;
 
     private int stock;
 

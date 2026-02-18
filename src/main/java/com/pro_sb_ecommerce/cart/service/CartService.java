@@ -14,6 +14,7 @@ import com.pro_sb_ecommerce.product.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -77,27 +78,7 @@ public class CartService {
         Cart cart = cartRepository.findByUser(user)
                 .orElseThrow(() -> new ResourceNotFoundException("Cart is empty"));
 
-        List<CartItemResponse> items = cart.getItems()
-                .stream()
-                .map(item -> new CartItemResponse(
-                        item.getProduct().getId(),
-                        item.getProduct().getName(),
-                        item.getPriceAtTime(),
-                        item.getQuantity(),
-                        item.getPriceAtTime() * item.getQuantity()
-                ))
-                .toList();
-
-        double totalAmount = items.stream()
-                .mapToDouble(CartItemResponse::getTotalPrice)
-                .sum();
-
-        return new CartResponse(
-                cart.getId(),
-                user.getId(),
-                items,
-                totalAmount
-        );
+        return CartMapper.toResponse(cart);
     }
 
     public CartResponse removeItemFromCart(User user, Long productId) {

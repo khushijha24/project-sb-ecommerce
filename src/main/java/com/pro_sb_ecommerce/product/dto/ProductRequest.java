@@ -3,6 +3,8 @@ import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 public class ProductRequest {
@@ -14,7 +16,7 @@ public class ProductRequest {
     private String description;
 
     @Positive(message = "Price must be greater than 0")
-    private double price;
+    private BigDecimal price;
 
     @Min(value = 0, message = "Stock cannot be negative")
     private int stock;
