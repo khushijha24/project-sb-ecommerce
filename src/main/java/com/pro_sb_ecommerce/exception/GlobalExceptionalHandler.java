@@ -46,4 +46,30 @@ public class GlobalExceptionalHandler {
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<ApiResponse<Void>> handleIllegalState(IllegalStateException ex) {
+
+        ApiResponse<Void> response = ApiResponse.<Void>builder()
+                .status(HttpStatus.CONFLICT.value())
+                .success(false)
+                .message(ex.getMessage())
+                .data(null)
+                .build();
+
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(org.springframework.security.access.AccessDeniedException.class)
+    public ResponseEntity<ApiResponse<Void>> handleAccessDenied(Exception ex) {
+
+        ApiResponse<Void> response = ApiResponse.<Void>builder()
+                .status(HttpStatus.FORBIDDEN.value())
+                .success(false)
+                .message("Access denied")
+                .data(null)
+                .build();
+
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+    }
 }
