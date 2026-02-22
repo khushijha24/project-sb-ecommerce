@@ -1,11 +1,7 @@
 package com.pro_sb_ecommerce.payment.controller;
 
-import com.pro_sb_ecommerce.auth.model.User;
-import com.pro_sb_ecommerce.auth.repository.UserRepository;
-import com.pro_sb_ecommerce.exception.ResourceNotFoundException;
 import com.pro_sb_ecommerce.payment.dto.PaymentRequest;
 import com.pro_sb_ecommerce.payment.dto.PaymentResponse;
-import com.pro_sb_ecommerce.payment.model.Payment;
 import com.pro_sb_ecommerce.payment.service.PaymentService;
 import com.pro_sb_ecommerce.response.ApiResponse;
 import jakarta.validation.Valid;

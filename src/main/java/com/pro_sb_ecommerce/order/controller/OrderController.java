@@ -2,7 +2,6 @@ package com.pro_sb_ecommerce.order.controller;
 
 import com.pro_sb_ecommerce.auth.model.User;
 import com.pro_sb_ecommerce.auth.repository.UserRepository;
-import com.pro_sb_ecommerce.cart.service.CartService;
 import com.pro_sb_ecommerce.exception.ResourceNotFoundException;
 import com.pro_sb_ecommerce.order.dto.OrderResponse;
 import com.pro_sb_ecommerce.order.mapper.OrderMapper;
