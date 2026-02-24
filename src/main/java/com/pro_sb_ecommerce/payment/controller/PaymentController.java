@@ -29,7 +29,6 @@ public class PaymentController {
         ApiResponse<PaymentResponse> apiResponse =
                 ApiResponse.<PaymentResponse>builder()
                         .status(HttpStatus.OK.value())
-                        .success(true)
                         .message("Payment processed successfully")
                         .data(response)
                         .build();
@@ -48,7 +47,6 @@ public class PaymentController {
         ApiResponse<PaymentResponse> apiResponse =
                 ApiResponse.<PaymentResponse>builder()
                         .status(HttpStatus.OK.value())
-                        .success(true)
                         .message("Payment processed successfully")
                         .data(response)
                         .build();

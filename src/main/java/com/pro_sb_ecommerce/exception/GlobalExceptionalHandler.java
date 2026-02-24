@@ -12,12 +12,25 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionalHandler {
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<ApiResponse<Void>> invalidCredentials(InvalidCredentialsException ex){
+
+        ApiResponse<Void> response=  ApiResponse.<Void>builder()
+                .status(HttpStatus.UNAUTHORIZED.value())
+                .message(ex.getMessage())
+                .data(null)
+                .build();
+
+        return new ResponseEntity<>(response,HttpStatus.UNAUTHORIZED);
+    }
+
+
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ApiResponse<Void>> handleResourceNotFound(ResourceNotFoundException ex){
 
         ApiResponse<Void> response = ApiResponse.<Void>builder()
                 .status(HttpStatus.NOT_FOUND.value())
-                .success(false)
                 .message(ex.getMessage())
                 .data(null)
                 .build();
@@ -39,7 +52,6 @@ public class GlobalExceptionalHandler {
 
         ApiResponse<Map<String, String>> response = ApiResponse.<Map<String,String>>builder()
                 .status(HttpStatus.BAD_REQUEST.value())
-                .success(false)
                 .message("Validation Failed")
                 .data(errors)
                 .build();
@@ -52,7 +64,6 @@ public class GlobalExceptionalHandler {
 
         ApiResponse<Void> response = ApiResponse.<Void>builder()
                 .status(HttpStatus.CONFLICT.value())
-                .success(false)
                 .message(ex.getMessage())
                 .data(null)
                 .build();
@@ -65,7 +76,6 @@ public class GlobalExceptionalHandler {
 
         ApiResponse<Void> response = ApiResponse.<Void>builder()
                 .status(HttpStatus.FORBIDDEN.value())
-                .success(false)
                 .message("Access denied")
                 .data(null)
                 .build();

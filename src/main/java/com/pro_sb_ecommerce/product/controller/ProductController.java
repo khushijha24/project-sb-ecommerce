@@ -30,7 +30,6 @@ public class ProductController {
 
         ApiResponse<ProductResponse> response = ApiResponse.<ProductResponse>builder()
                 .status(HttpStatus.CREATED.value())
-                .success(true)
                 .message("Product Created Successfully")
                 .data(product)
                 .build();
@@ -46,7 +45,6 @@ public class ProductController {
 
         ApiResponse<List<ProductResponse>> response= ApiResponse.<List<ProductResponse>>builder()
                 .status(HttpStatus.OK.value())
-                .success(true)
                 .message("Products Successfully Fetched")
                 .data(products)
                 .build();
@@ -61,7 +59,6 @@ public class ProductController {
 
         ApiResponse<ProductResponse> response = ApiResponse.<ProductResponse>builder()
                 .status(HttpStatus.OK.value())
-                .success(true)
                 .message("Product Fetched Successfully")
                 .data(product)
                 .build();
@@ -75,7 +72,6 @@ public class ProductController {
 
         ApiResponse<List<ProductResponse>> response = ApiResponse.<List<ProductResponse>>builder()
                 .status(HttpStatus.OK.value())
-                .success(true)
                 .message("Products fetched successfully for category" + categoryId)
                 .data(products)
                 .build();
@@ -92,7 +88,6 @@ public class ProductController {
 
         ApiResponse<ProductResponse> response = ApiResponse.<ProductResponse>builder()
                 .status(HttpStatus.OK.value())
-                .success(true)
                 .message("Product Updated Successfully")
                 .data(updatedProduct)
                 .build();
@@ -106,7 +101,6 @@ public class ProductController {
 
         ApiResponse<Void> response = ApiResponse.<Void>builder()
                 .status(HttpStatus.NO_CONTENT.value())
-                .success(true)
                 .message("Product Successfully Deleted")
                 .data(null)
                 .build();
@@ -148,7 +142,6 @@ public class ProductController {
         ApiResponse<List<ProductResponse>> response =
                 ApiResponse.<List<ProductResponse>>builder()
                         .status(HttpStatus.OK.value())
-                        .success(true)
                         .message("Products sorted successfully")
                         .data(products)
                         .build();
@@ -168,7 +161,6 @@ public class ProductController {
         ApiResponse<List<ProductResponse>> response =
                 ApiResponse.<List<ProductResponse>>builder()
                         .status(HttpStatus.OK.value())
-                        .success(true)
                         .message("Search results")
                         .data(products)
                         .build();
@@ -187,7 +179,6 @@ public class ProductController {
         ApiResponse<List<ProductResponse>> response =
                 ApiResponse.<List<ProductResponse>>builder()
                         .status(HttpStatus.OK.value())
-                        .success(true)
                         .message("Products in price range")
                         .data(products)
                         .build();
@@ -207,7 +198,6 @@ public class ProductController {
         ApiResponse<List<ProductResponse>> response =
                 ApiResponse.<List<ProductResponse>>builder()
                         .status(HttpStatus.OK.value())
-                        .success(true)
                         .message("Category products sorted")
                         .data(products)
                         .build();

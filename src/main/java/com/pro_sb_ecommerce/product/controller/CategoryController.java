@@ -29,7 +29,6 @@ public class CategoryController {
 
         ApiResponse<Category> response = ApiResponse.<Category>builder()
                 .status(HttpStatus.CREATED.value())
-                .success(true)
                 .message("Category created successfully")
                 .data(savedCategory)
                 .build();
@@ -44,7 +43,6 @@ public class CategoryController {
 
         ApiResponse<List<Category>> response = ApiResponse.<List<Category>>builder()
                 .status(HttpStatus.OK.value())
-                .success(true)
                 .message("Categories fetched successfully")
                 .data(categories)
                 .build();

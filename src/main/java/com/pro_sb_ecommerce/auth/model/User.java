@@ -29,10 +29,4 @@ public class User {
 
     @Column(nullable = false)
     private String role; // USER / ADMIN
-
-//    private boolean enabled; // OTP verified or not
-//
-//    private String otp;
-//    private LocalDateTime otpExpiry;
-
 }

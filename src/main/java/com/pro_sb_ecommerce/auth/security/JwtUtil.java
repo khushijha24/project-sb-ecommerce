@@ -13,13 +13,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import static com.pro_sb_ecommerce.auth.security.JwtConstant.SECRET_KEY;
+
 @Component
 public class JwtUtil {
 
     // ✅ Secret key MUST be converted
-    private final SecretKey SECRET_KEY = Keys.hmacShaKeyFor(
-            "my_super_secret_key_which_is_very_secure_12345"
-                    .getBytes(StandardCharsets.UTF_8)
+    SecretKey key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8)
     );
 
     private final long JWT_EXPIRATION = 1000 * 60 * 60 * 10; // 10 hours
@@ -35,7 +35,7 @@ public class JwtUtil {
                 .setSubject(email)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION))
-                .signWith(SECRET_KEY, SignatureAlgorithm.HS256)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 
@@ -56,7 +56,7 @@ public class JwtUtil {
 
     private Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
-                .setSigningKey(SECRET_KEY)
+                .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
@@ -68,12 +68,12 @@ public class JwtUtil {
         return extractedEmail.equals(email) && !isTokenExpired(token);
     }
 
-//    ✔ Extract expiration
+//  Extract expiration
     public Date extractExpiration(String token) {
         return extractAllClaims(token).getExpiration();
     }
 
-//    ✔ Check expiry
+//  Check expiry
     public boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }

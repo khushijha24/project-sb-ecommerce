@@ -43,7 +43,6 @@ public class CartController {
 
         ApiResponse<CartResponse> response = ApiResponse.<CartResponse>builder()
                 .status(HttpStatus.OK.value())
-                .success(true)
                 .message("Cart fetched successfully")
                 .data(cart)
                 .build();
@@ -63,7 +62,6 @@ public class CartController {
 
         ApiResponse<CartResponse> response = ApiResponse.<CartResponse>builder()
                 .status(HttpStatus.OK.value())
-                .success(true)
                 .message("Item added to cart")
                 .data(cart)
                 .build();
@@ -83,7 +81,6 @@ public class CartController {
 
         ApiResponse<CartResponse> response = ApiResponse.<CartResponse>builder()
                 .status(HttpStatus.OK.value())
-                .success(true)
                 .message("Item removed from cart")
                 .data(cart)
                 .build();
@@ -100,7 +97,6 @@ public class CartController {
 
         ApiResponse<String> response = ApiResponse.<String>builder()
                 .status(HttpStatus.OK.value())
-                .success(true)
                 .message("Cart cleared successfully")
                 .data("Cart is now empty")
                 .build();

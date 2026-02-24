@@ -47,7 +47,6 @@ public class OrderController {
         ApiResponse<OrderResponse> response =
                 ApiResponse.<OrderResponse>builder()
                         .status(HttpStatus.CREATED.value())
-                        .success(true)
                         .message("Order placed successfully")
                         .data(orderResponse)
                         .build();
@@ -70,7 +69,6 @@ public class OrderController {
         ApiResponse<List<OrderResponse>> response =
                 ApiResponse.<List<OrderResponse>>builder()
                         .status(HttpStatus.OK.value())
-                        .success(true)
                         .message("Orders fetched successfully")
                         .data(orderResponses)
                         .build();

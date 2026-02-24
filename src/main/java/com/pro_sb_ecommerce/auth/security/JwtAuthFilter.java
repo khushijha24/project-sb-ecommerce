@@ -23,12 +23,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         this.jwtUtil = jwtUtil;
     }
 
-//    @Override
-//    protected boolean shouldNotFilter(HttpServletRequest request) {
-//        String path = request.getRequestURI();
-//        return path.startsWith("/api/auth/");
-//    }
-
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getServletPath();
@@ -87,13 +81,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 //                    new WebAuthenticationDetailsSource().buildDetails(request)
 //            );
 
-            System.out.println("Before setting auth: "
-                    + SecurityContextHolder.getContext().getAuthentication());
+//            System.out.println("Before setting auth: "
+//                    + SecurityContextHolder.getContext().getAuthentication());
 
             SecurityContextHolder.getContext().setAuthentication(authToken);
 
-            System.out.println("After setting auth: "
-                    + SecurityContextHolder.getContext().getAuthentication());
+//            System.out.println("After setting auth: "
+//                    + SecurityContextHolder.getContext().getAuthentication());
         }
 
         filterChain.doFilter(request, response);
