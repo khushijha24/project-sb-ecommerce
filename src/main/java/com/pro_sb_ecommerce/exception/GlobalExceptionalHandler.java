@@ -25,6 +25,18 @@ public class GlobalExceptionalHandler {
         return new ResponseEntity<>(response,HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ApiResponse<Void>> userNotFoundException(UserNotFoundException ex){
+
+        ApiResponse<Void> response = ApiResponse.<Void>builder()
+                .status(HttpStatus.NOT_FOUND.value())
+                .message(ex.getMessage())
+                .data(null)
+                .build();
+
+        return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
+    }
+
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ApiResponse<Void>> handleResourceNotFound(ResourceNotFoundException ex){
