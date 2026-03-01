@@ -36,8 +36,7 @@ public class ProductController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    // USER ONLY
-//    @PreAuthorize("hasRole('USER')")
+
     @GetMapping
     public ResponseEntity<ApiResponse<List<ProductResponse>>> getAllProducts() {
 
